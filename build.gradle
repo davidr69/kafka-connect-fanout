@@ -1,0 +1,41 @@
+plugins {
+	id 'java'
+}
+
+group = 'com.lavacro.connect'
+version = '2.0.0'
+description = 'RoundRobinRouter SMT for Kafka Connect'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.apache.kafka:connect-api:4.1.1'
+	implementation 'org.slf4j:slf4j-jdk-platform-logging:2.0.17'
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	manifest {
+		attributes(
+				'Implementation-Title': project.name,
+				'Implementation-Version': project.version,
+				'Created-By': 'Gradle'
+		)
+	}
+
+	// produce a standalone JAR without dependencies (Kafka provides them)
+	from {
+		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = 'UTF-8'
+}
