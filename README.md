@@ -1,14 +1,17 @@
 # Kafka Connect plugin
 
 Kafka topics can only be read by a 1:1 ratio of consumer group to
-partition. A topic with 4 partitions has a maximum of 4 distinct
+partition. A topic with four partitions has a maximum of four distinct
 consumers within a consumer group (additional will not be assigned
 a partition unless a rebalance occurs). If the consumer performs
 operations which cause it unable to process messages immediately,
-lag will begin to accrue. Since you cannot arbitrarily scale
+lag will begin to grow. Since you cannot arbitrarily scale
 horizontally, this Kafka Connect plugin will fan out a topic
 into multiple "sub-topics". This allows more parallel consumers,
 allowing processing of more messages simultaneously.
+
+Note that this plugin has been updated from Kafka 3.7.x to 4.1.x,
+requiring a Kafka 4 cluster.
 
 ### connect-standalone.properties
 ```properties
