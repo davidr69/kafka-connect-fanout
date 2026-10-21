@@ -12,7 +12,7 @@ repositories {
 
 dependencies {
 	implementation 'org.apache.kafka:connect-api:4.1.2'
-	implementation 'org.slf4j:slf4j-jdk-platform-logging:2.0.17'
+	implementation 'org.slf4j:slf4j-jdk-platform-logging:2.0.20'
 }
 
 java {
